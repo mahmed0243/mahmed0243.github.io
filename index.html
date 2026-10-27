@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Mohamed Ahmed, software engineer working in C#, .NET and AWS. Backend services, microservices and multi-tenant SaaS.">
+<title>Mohamed Ahmed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single editorial column, left-aligned; hero with a live-looking gateway request log; sections keyed by a mono margin label */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --ink:#131a2b; --muted:#5a6479; --line:#dde2ea;
+  --accent:#2a47c9; --accent-soft:#e3e8fb; --ok:#1f7a4d;
+  --display:"Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --body:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0e1320; --surface:#151c2e; --ink:#e8ecf4; --muted:#98a2b8; --line:#253049;
+  --accent:#8ea3ff; --accent-soft:#1d2848; --ok:#5fd29a; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0e1320; --surface:#151c2e; --ink:#e8ecf4; --muted:#98a2b8; --line:#253049;
+  --accent:#8ea3ff; --accent-soft:#1d2848; --ok:#5fd29a; color-scheme:dark }
+
+*{box-sizing:border-box}
+html{padding-block:env(safe-area-inset-top,0px) env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1rem;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:60rem;margin:0 auto;padding-block:clamp(2rem,6vw,4.5rem) 3rem}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(1.5rem,4vw,3rem);align-items:end;padding-bottom:clamp(2.5rem,6vw,4rem);border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:.5rem;margin-bottom:1.1rem}
+.dot{width:.5rem;height:.5rem;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 22%,transparent)}
+h1{font-size:clamp(2.8rem,9vw,5.6rem);font-weight:800;line-height:.95;letter-spacing:-.035em}
+h1 span{color:var(--accent)}
+.lede{font-size:clamp(1.05rem,2.2vw,1.22rem);color:var(--muted);max-width:34rem;margin:1.3rem 0 0}
+.lede strong{color:var(--ink);font-weight:500}
+.actions{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.6rem}
+.btn{font:500 .92rem var(--body);padding:.7rem 1.1rem;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;gap:.45rem}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.btn:hover{border-color:var(--accent)}
+
+.log{font-family:var(--mono);font-size:.78rem;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1rem 1.1rem;min-width:0;overflow-x:auto}
+.log-head{color:var(--muted);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.6rem}
+.log ol{list-style:none;margin:0;padding:0;display:grid;gap:.35rem}
+.log li{display:grid;grid-template-columns:3.2rem 1fr auto;gap:.6rem;white-space:nowrap}
+.m{color:var(--accent);font-weight:500}.s{color:var(--ok)}.p{color:var(--ink);overflow:hidden;text-overflow:ellipsis}
+@media (prefers-reduced-motion:no-preference){
+  .log li{animation:in .5s both}.log li:nth-child(2){animation-delay:.15s}.log li:nth-child(3){animation-delay:.3s}.log li:nth-child(4){animation-delay:.45s}.log li:nth-child(5){animation-delay:.6s}
+  @keyframes in{from{transform:translateY(4px);opacity:.25}}
+}
+
+/* Sections */
+section{display:grid;grid-template-columns:11rem 1fr;gap:1.5rem 2.5rem;padding-block:clamp(2.2rem,5vw,3.4rem);border-bottom:1px solid var(--line)}
+.label{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:.35rem}
+.content{min-width:0;display:grid;gap:2rem}
+
+.role{display:grid;gap:.5rem}
+.role-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.25rem 1rem;align-items:baseline}
+h3{font-size:1.3rem;font-weight:600;letter-spacing:-.01em}
+.org{color:var(--accent)}
+.when{font-family:var(--mono);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+ul.points{margin:.2rem 0 0;padding-left:1.1rem;display:grid;gap:.45rem;max-width:42rem}
+ul.points li::marker{color:var(--accent)}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.3rem}
+.tag{font-family:var(--mono);font-size:.72rem;padding:.2rem .55rem;border-radius:4px;background:var(--accent-soft);color:var(--ink)}
+
+.projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.project{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.4rem;display:grid;gap:.6rem;align-content:start}
+.project p{margin:0;color:var(--muted)}
+
+.skills{display:grid;gap:1.1rem}
+.skill-row{display:grid;grid-template-columns:10rem 1fr;gap:.4rem 1rem;align-items:baseline}
+.skill-row dt{font-weight:600;font-size:.92rem}
+.skill-row dd{margin:0;color:var(--muted)}
+
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.6rem 2rem}
+.pair p{margin:.3rem 0 0;color:var(--muted)}
+.grade{display:inline-block;font-family:var(--mono);font-size:.75rem;padding:.15rem .5rem;border:1px solid var(--accent);color:var(--accent);border-radius:4px;margin-top:.5rem}
+
+.contact{display:grid;gap:.7rem;max-width:34rem}
+.contact-row{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.85rem 1rem;background:var(--surface);border:1px solid var(--line);border-radius:10px;min-width:0}
+.contact-row div{min-width:0}
+.contact-row small{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.contact-row a{display:block;color:var(--ink);text-decoration:none;overflow-wrap:anywhere}.contact-row a:hover{color:var(--accent)}
+.copy{font:500 .8rem var(--body);background:none;border:1px solid var(--line);color:var(--ink);padding:.4rem .75rem;border-radius:999px;cursor:pointer;flex-shrink:0}
+.copy:hover{border-color:var(--accent)}
+.rights{color:var(--muted);margin:0;max-width:40rem}
+footer{padding-top:2rem;font-family:var(--mono);font-size:.75rem;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr}
+  section{grid-template-columns:1fr;gap:1rem}
+  .projects,.pair{grid-template-columns:1fr}
+  .skill-row{grid-template-columns:1fr;gap:.1rem}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Open to roles · Sheffield, UK · willing to relocate</p>
+      <h1>Mohamed<br><span>Ahmed</span></h1>
+      <p class="lede">Software engineer building <strong>backend services, microservices and multi-tenant SaaS</strong> in C#, .NET and AWS. Two years shipping telecoms provisioning work at Giacom and Daisy / XLN.</p>
+      <div class="actions">
+        <a class="btn primary" href="#contact">Get in touch</a>
+        <a class="btn" href="https://linkedin.com/in/doc004" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+    <aside class="log" aria-label="Career shown as a request log">
+      <div class="log-head">gateway.log · tail</div>
+      <ol>
+        <li><span class="m">POST</span><span class="p">/broadband/pxc/provision</span><span class="s">201</span></li>
+        <li><span class="m">PUT</span><span class="p">/sms/router-return/remind</span><span class="s">200</span></li>
+        <li><span class="m">POST</span><span class="p">/mobile/port-in/multi</span><span class="s">202</span></li>
+        <li><span class="m">GET</span><span class="p">/tenants/{id}/complaints</span><span class="s">200</span></li>
+        <li><span class="m">GET</span><span class="p">/degree/bsc-cs-ai</span><span class="s">2:1</span></li>
+      </ol>
+    </aside>
+  </header>
+
+  <section id="experience">
+    <div class="label">Experience</div>
+    <div class="content">
+      <article class="role">
+        <div class="role-top"><h3>Software Engineer Intern · <span class="org">Giacom</span></h3><span class="when">Jun 2025 – Sep 2025</span></div>
+        <ul class="points">
+          <li>Integrated PXC (TalkTalk) provisioning into existing broadband microservices, extending REST API integrations across the provisioning platform.</li>
+          <li>Built a Postman mock server and edge-case suite for PXC workflows, so the team could validate integration behaviour before supplier endpoints existed.</li>
+          <li>Added an event-driven handler to the SMS notification service: an hourly scheduled AWS Lambda that automates router-return reminders, unit tested and released through CI/CD.</li>
+        </ul>
+        <div class="tags"><span class="tag">C#</span><span class="tag">.NET</span><span class="tag">AWS Lambda</span><span class="tag">REST</span><span class="tag">Postman</span></div>
+      </article>
+      <article class="role">
+        <div class="role-top"><h3>Software Engineer Intern · <span class="org">Daisy Communications / XLN</span></h3><span class="when">Jun 2024 – May 2025</span></div>
+        <ul class="points">
+          <li>Built a multi-number mobile port-in workflow in C# and .NET, letting agents port several numbers for multi-line clients and cutting call handling time.</li>
+          <li>Migrated a mobile new-provider workflow from legacy ASP.NET Web Forms to Angular and TypeScript, onboarding quickly to an unfamiliar codebase.</li>
+          <li>Automated recurring IOPS failure remediation with a C# utility, saving support about five minutes per ticket.</li>
+        </ul>
+        <div class="tags"><span class="tag">C#</span><span class="tag">Angular</span><span class="tag">TypeScript</span><span class="tag">Scrum</span><span class="tag">Git</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="label">Projects</div>
+    <div class="content">
+      <div class="projects">
+        <article class="project">
+          <span class="when">2025 – 2026</span>
+          <h3>Multi-Tenant Complaint Management</h3>
+          <p>SaaS platform with a database-per-tenant model on PostgreSQL and AWS RDS for strict isolation. A gateway API handles authentication, JWT validation and RBAC for every tenant. Services run in Docker with CI/CD and CloudWatch logging and metrics.</p>
+          <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">AWS RDS</span><span class="tag">Docker</span><span class="tag">JWT</span></div>
+        </article>
+        <article class="project">
+          <span class="when">2023 – 2024</span>
+          <h3>Automated Card Shuffler &amp; Dealer</h3>
+          <p>Robotics build from 3D-printed parts to Raspberry Pi control. A YOLOv8 computer vision system in Python detects how many players are seated and where, then deals to each position.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">YOLOv8</span><span class="tag">Raspberry Pi</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="label">Skills</div>
+    <dl class="content skills">
+      <div class="skill-row"><dt>Languages</dt><dd>C#, Java, Python, JavaScript, TypeScript, SQL, PHP, C++</dd></div>
+      <div class="skill-row"><dt>Backend &amp; cloud</dt><dd>.NET, REST APIs, Node.js, Docker, AWS (Lambda, SNS, SQS, S3, RDS, EC2, CloudWatch)</dd></div>
+      <div class="skill-row"><dt>Frontend &amp; data</dt><dd>React, Angular, ASP.NET, PostgreSQL, MongoDB</dd></div>
+      <div class="skill-row"><dt>Architecture</dt><dd>Microservices, SOA, Domain-Driven Design, multi-tenant SaaS, RBAC, JWT</dd></div>
+      <div class="skill-row"><dt>Practice</dt><dd>CI/CD, unit testing, TDD, Agile, Scrum, Kanban, Azure DevOps, Git</dd></div>
+      <div class="skill-row"><dt>Spoken</dt><dd>Somali (native), English (fluent), Norwegian (basic)</dd></div>
+    </dl>
+  </section>
+
+  <section id="education">
+    <div class="label">Education &amp; leadership</div>
+    <div class="content pair">
+      <div>
+        <h3>BSc Computer Science with AI</h3>
+        <p>Sheffield Hallam University · 2022 – 2026</p>
+        <span class="grade">2:1 Upper Second</span>
+      </div>
+      <div>
+        <h3>Software Engineering (WanDisco)</h3>
+        <p>Sheffield City College · 2019 – 2021</p>
+      </div>
+      <div>
+        <h3>Course Representative</h3>
+        <p>One of three reps for CS with AI. Gathered student feedback and helped shape changes to Algorithms &amp; Data Structures and Software Architecture.</p>
+      </div>
+      <div>
+        <h3>Vice-President, TechnoCommerce Society</h3>
+        <p>Ran guest speaker events and coding competitions for members, 2023 – 2024.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="label">Contact</div>
+    <div class="content">
+      <div class="contact">
+        <div class="contact-row"><div><small>Email</small><a href="mailto:mo.saed.ahmed02@gmail.com">mo.saed.ahmed02@gmail.com</a></div><button class="copy" id="copy-email" data-copy="mo.saed.ahmed02@gmail.com">Copy</button></div>
+        <div class="contact-row"><div><small>Phone</small><a href="tel:+447880599559">+44 7880 599559</a></div><button class="copy" id="copy-phone" data-copy="+447880599559">Copy</button></div>
+      </div>
+      <p class="rights">Norwegian citizen with UK indefinite leave to remain. Full right to work in the UK, EU/EEA and Switzerland.</p>
+    </div>
+  </section>
+
+  <footer><span>© 2026 Mohamed Ahmed</span><span>Built in Sheffield</span></footer>
+</div>
+
+<script>
+document.querySelectorAll('.copy').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var text = btn.dataset.copy;
+    var done = function(){ btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = 'Copy'; }, 1600); };
+    var fallback = function(){
+      var span = btn.parentElement.querySelector("a");
+      var r = document.createRange(); r.selectNodeContents(span);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = 'Selected';
+    };
+    try { navigator.clipboard.writeText(text).then(done, fallback); } catch(e){ fallback(); }
+  });
+});
+</script>
+</body>
+</html>
